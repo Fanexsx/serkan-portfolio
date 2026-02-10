@@ -1,0 +1,1014 @@
+<!DOCTYPE html>
+<html lang="tr">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Serkan Kılıç | Elektrik Teknikeri</title>
+
+  <style>
+    :root {
+      --bg: #0b0c10;
+      --text: #f4f6f8;
+      --muted: #b9c0c7;
+      --accent: #f5c400;
+      --border: rgba(255, 255, 255, .10);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .container {
+      width: min(1120px, 92%);
+      margin: 0 auto;
+    }
+
+    .section {
+      padding: 56px 0;
+    }
+
+    /* Topbar */
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      backdrop-filter: blur(10px);
+      background: rgba(11, 12, 16, .65);
+      border-bottom: 1px solid rgba(255, 255, 255, .06);
+    }
+
+    .topbar-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 14px 0;
+      gap: 18px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      min-width: 180px;
+    }
+
+    .brand-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 999px;
+      background: var(--accent);
+      box-shadow: 0 0 0 6px rgba(245, 196, 0, .10);
+    }
+
+    .brand-title {
+      font-weight: 900;
+      letter-spacing: .2px;
+      white-space: nowrap;
+    }
+
+    .nav {
+      display: flex;
+      gap: 16px;
+      color: var(--muted);
+      font-weight: 700;
+      font-size: 13px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .nav a {
+      padding: 6px 8px;
+      border-radius: 10px;
+    }
+
+    .nav a:hover {
+      color: var(--accent);
+      background: rgba(245, 196, 0, .08);
+    }
+
+    /* Language switch */
+    .lang-switch {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-weight: 900;
+      flex-shrink: 0;
+      border: 1px solid rgba(255, 255, 255, .10);
+      background: rgba(255, 255, 255, .03);
+      padding: 6px;
+      border-radius: 14px;
+    }
+
+    .lang-btn {
+      background: none;
+      border: none;
+      color: var(--muted);
+      cursor: pointer;
+      padding: 6px 10px;
+      border-radius: 10px;
+      font-weight: 900;
+      letter-spacing: .2px;
+    }
+
+    .lang-btn:hover {
+      color: var(--accent);
+    }
+
+    .lang-btn.active {
+      color: #111;
+      background: var(--accent);
+    }
+
+    .lang-sep {
+      color: rgba(255, 255, 255, .25);
+      font-weight: 900;
+    }
+
+    /* Layout */
+    .grid {
+      display: grid;
+      grid-template-columns: 1.6fr .9fr;
+      gap: 22px;
+      align-items: start;
+    }
+
+    .card {
+      background: linear-gradient(180deg, rgba(255, 255, 255, .06), rgba(255, 255, 255, .03));
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      padding: 18px;
+    }
+
+    hr.sep {
+      border: none;
+      height: 1px;
+      background: var(--border);
+      margin: 18px 0;
+    }
+
+    .h-title {
+      margin: 0 0 10px;
+      font-size: 14px;
+      letter-spacing: .8px;
+      text-transform: uppercase;
+      color: var(--accent);
+      font-weight: 900;
+    }
+
+    .h2 {
+      margin: 0 0 8px;
+      font-size: 28px;
+      letter-spacing: -.6px;
+      font-weight: 900;
+    }
+
+    .p {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.75;
+      font-size: 14.5px;
+    }
+
+    /* Hero */
+    .hero {
+      display: grid;
+      grid-template-columns: 120px 1fr;
+      gap: 16px;
+      align-items: center;
+    }
+
+    .avatar {
+      width: 120px;
+      height: 120px;
+      border-radius: 22px;
+      border: 1px solid var(--border);
+      object-fit: cover;
+    }
+
+    .role {
+      margin: 6px 0 10px;
+      color: var(--accent);
+      font-weight: 900;
+      letter-spacing: .2px;
+    }
+
+    .actions {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-top: 14px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 11px 14px;
+      border-radius: 14px;
+      border: 1px solid var(--border);
+      font-weight: 900;
+      font-size: 13px;
+      letter-spacing: .2px;
+      transition: transform .2s ease, border-color .2s ease;
+    }
+
+    .btn:hover {
+      transform: translateY(-1px);
+      border-color: rgba(245, 196, 0, .35);
+    }
+
+    .btn-accent {
+      background: linear-gradient(180deg, rgba(245, 196, 0, .95), rgba(245, 196, 0, .85));
+      color: #111;
+      border-color: rgba(245, 196, 0, .55);
+    }
+
+    .btn-ghost {
+      background: rgba(255, 255, 255, .03);
+    }
+
+    /* Contact */
+    .contact-list {
+      display: grid;
+      gap: 10px;
+      margin-top: 6px;
+    }
+
+    .contact-item {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+      padding: 10px 12px;
+      border-radius: 14px;
+      border: 1px solid rgba(255, 255, 255, .08);
+      background: rgba(0, 0, 0, .15);
+    }
+
+    .contact-label {
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .contact-value {
+      font-weight: 900;
+      letter-spacing: .1px;
+    }
+
+    /* Skills */
+    .skills {
+      margin-top: 22px;
+    }
+
+    .badges {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .badge {
+      padding: 10px 12px;
+      border-radius: 999px;
+      border: 1px solid rgba(255, 255, 255, .10);
+      background: rgba(255, 255, 255, .03);
+      font-weight: 900;
+      font-size: 12.5px;
+    }
+
+    .badge:hover {
+      border-color: rgba(245, 196, 0, .35);
+    }
+
+    /* Projects Timeline */
+    .timeline {
+      position: relative;
+      margin-top: 10px;
+      padding-left: 22px;
+    }
+
+    .timeline:before {
+      content: "";
+      position: absolute;
+      left: 9px;
+      top: 0;
+      bottom: 0;
+      width: 2px;
+      background: linear-gradient(to bottom, rgba(245, 196, 0, .18), rgba(245, 196, 0, .75), rgba(245, 196, 0, .18));
+    }
+
+    .tl-item {
+      position: relative;
+      padding: 14px 0;
+    }
+
+    .tl-dot {
+      position: absolute;
+      left: 0;
+      top: 22px;
+      width: 18px;
+      height: 18px;
+      border-radius: 999px;
+      background: var(--bg);
+      border: 2px solid var(--accent);
+      box-shadow: 0 0 0 6px rgba(245, 196, 0, .08);
+    }
+
+    .tl-card {
+      margin-left: 14px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 14px 14px;
+      border-radius: 18px;
+      border: 1px solid rgba(255, 255, 255, .10);
+      background: linear-gradient(180deg, rgba(255, 255, 255, .06), rgba(255, 255, 255, .03));
+      transition: transform .2s ease, border-color .2s ease;
+      cursor: pointer;
+      position: relative;
+    }
+
+    .tl-card:hover {
+      transform: translateY(-1px);
+      border-color: rgba(245, 196, 0, .35);
+    }
+
+    .tl-card:focus {
+      outline: 2px solid rgba(245, 196, 0, .55);
+      outline-offset: 2px;
+    }
+
+    .tl-card.disabled {
+      cursor: default;
+      opacity: .88;
+    }
+
+    .tl-card.disabled:hover {
+      transform: none;
+      border-color: rgba(255, 255, 255, .10);
+    }
+
+    .tl-chip {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      font-size: 11px;
+      font-weight: 900;
+      padding: 6px 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(255, 255, 255, .12);
+      background: rgba(0, 0, 0, .22);
+      color: var(--muted);
+    }
+
+    .tl-chip.play {
+      border-color: rgba(245, 196, 0, .35);
+      color: var(--accent);
+      background: rgba(245, 196, 0, .10);
+    }
+
+    .tl-logo {
+      width: 42px;
+      height: 42px;
+      flex: 0 0 42px;
+      border-radius: 12px;
+      object-fit: contain;
+      background: rgba(255, 255, 255, .04);
+      border: 1px solid rgba(255, 255, 255, .10);
+      padding: 6px;
+    }
+
+    .tl-title {
+      margin: 0;
+      font-weight: 900;
+      letter-spacing: .2px;
+    }
+
+    .tl-meta {
+      margin: 4px 0 0;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.5;
+    }
+
+    .tl-content {
+      min-width: 0;
+    }
+
+    /* Modal */
+    .modal {
+      position: fixed;
+      inset: 0;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 18px;
+      background: rgba(0, 0, 0, .65);
+      backdrop-filter: blur(6px);
+      z-index: 9999;
+    }
+
+    .modal.open {
+      display: flex;
+    }
+
+    .modal-box {
+      width: min(980px, 96vw);
+      border-radius: 18px;
+      border: 1px solid rgba(255, 255, 255, .12);
+      background: linear-gradient(180deg, rgba(255, 255, 255, .07), rgba(255, 255, 255, .03));
+      overflow: hidden;
+      box-shadow: 0 20px 70px rgba(0, 0, 0, .55);
+    }
+
+    .modal-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 12px 14px;
+      border-bottom: 1px solid rgba(255, 255, 255, .10);
+    }
+
+    .modal-title {
+      font-weight: 900;
+      letter-spacing: .2px;
+    }
+
+    .modal-close {
+      appearance: none;
+      border: none;
+      cursor: pointer;
+      border-radius: 12px;
+      padding: 8px 10px;
+      font-weight: 900;
+      background: rgba(255, 255, 255, .06);
+      color: var(--text);
+    }
+
+    .modal-close:hover {
+      background: rgba(245, 196, 0, .12);
+      color: var(--accent);
+    }
+
+    .modal-video {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      background: #000;
+    }
+
+    .modal-video iframe {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      border: 0;
+    }
+
+    /* Toast */
+    .toast {
+      position: fixed;
+      left: 50%;
+      bottom: 22px;
+      transform: translateX(-50%) translateY(16px);
+      opacity: 0;
+      pointer-events: none;
+      padding: 12px 14px;
+      border-radius: 14px;
+      border: 1px solid rgba(255, 255, 255, .12);
+      background: rgba(0, 0, 0, .55);
+      backdrop-filter: blur(10px);
+      color: var(--text);
+      font-weight: 900;
+      font-size: 13px;
+      box-shadow: 0 18px 60px rgba(0, 0, 0, .55);
+      transition: opacity .25s ease, transform .25s ease;
+      z-index: 10000;
+      min-width: 260px;
+      text-align: left;
+    }
+
+    .toast.show {
+      opacity: 1;
+      transform: translateX(-50%) translateY(0);
+    }
+
+    .toast small {
+      display: block;
+      margin-top: 4px;
+      color: var(--muted);
+      font-weight: 700;
+      line-height: 1.35;
+    }
+
+    /* Reveal */
+    .reveal {
+      opacity: 0;
+      transform: translateY(14px);
+      transition: opacity .6s ease, transform .6s ease;
+    }
+
+    .reveal.is-visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    footer {
+      padding: 40px 0;
+      color: var(--muted);
+      text-align: center;
+      border-top: 1px solid rgba(255, 255, 255, .06);
+    }
+
+    @media (max-width: 980px) {
+      .grid {
+        grid-template-columns: 1fr;
+      }
+
+      .skills {
+        margin-top: 0;
+      }
+
+      .hero {
+        grid-template-columns: 96px 1fr;
+      }
+
+      .avatar {
+        width: 96px;
+        height: 96px;
+        border-radius: 18px;
+      }
+
+      .nav {
+        display: none;
+      }
+
+      .brand {
+        min-width: auto;
+      }
+
+      .toast {
+        min-width: 84vw;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <header class="topbar">
+    <div class="container topbar-inner">
+      <div class="brand">
+        <span class="brand-dot"></span>
+        <span class="brand-title">Serkan Kılıç</span>
+      </div>
+
+      <nav class="nav">
+        <a href="#about" data-lang="tr">Hakkımda</a>
+        <a href="#about" data-lang="en">About</a>
+        <a href="#projects" data-lang="tr">Projeler</a>
+        <a href="#projects" data-lang="en">Projects</a>
+      </nav>
+
+      <div class="lang-switch" aria-label="Language switch">
+        <button type="button" class="lang-btn" id="btnTR">TR</button>
+        <span class="lang-sep">|</span>
+        <button type="button" class="lang-btn" id="btnEN">EN</button>
+      </div>
+    </div>
+  </header>
+
+  <main>
+
+    <!-- ABOUT -->
+    <section id="about" class="section">
+      <div class="container grid">
+
+        <div class="card reveal">
+          <div class="hero">
+            <img class="avatar" src="infos/vesikalk2.jpeg" alt="Serkan Kılıç" />
+            <div>
+              <div class="h2">Serkan Kılıç</div>
+              <div class="role" data-lang="tr">Elektrik Teknikeri | Robotik & Endüstriyel Otomasyon</div>
+              <div class="role" data-lang="en">Electrical Technician | Robotic & Industrial Automation</div>
+            </div>
+          </div>
+
+          <hr class="sep" />
+
+          <div class="h-title" data-lang="tr">Hakkımda</div>
+          <div class="h-title" data-lang="en">About Me</div>
+
+          <p class="p" data-lang="tr">
+            Elektrik Teknikeri olarak robotik ve endüstriyel otomasyon projelerinde aktif saha ve kurulum tecrübesine
+            sahibim.
+            Kariyerim boyunca pano imalatı, elektrik montajı, saha kurulumları ve EPLAN Electric P8 ile elektrik proje
+            çizimi alanlarında görev aldım.
+            Otomotiv, gıda, madencilik ve endüstriyel üretim tesislerinde; paletleme, paketleme ve CNC besleme gibi
+            yüksek otomasyonlu projelerde sahada aktif rol aldım.
+            Teknik standartlara uygun, güvenli ve sürdürülebilir kurulum süreçlerini önceliklendiririm.
+          </p>
+
+          <p class="p" data-lang="en">
+            I am an Electrical Technician with hands-on experience in robotic and industrial automation projects.
+            Throughout my career, I have worked in panel assembly, electrical installation, field setup, and electrical
+            project design using EPLAN Electric P8.
+            I have contributed actively on-site in highly automated projects such as palletizing, packaging, and CNC
+            feeding systems across automotive, food, mining, and industrial facilities.
+            I prioritize safety, technical standards, and reliable project execution.
+          </p>
+
+          <div class="actions">
+            <a class="btn btn-accent" href="infos/SerkanCV.pdf" download data-lang="tr">CV'yi İndir
+              (PDF)</a>
+            <a class="btn btn-accent" href="infos/SerkanCV.pdf" download data-lang="en">Download CV
+              (PDF)</a>
+
+            <a class="btn btn-ghost" href="#projects" data-lang="tr">Projeleri Gör</a>
+            <a class="btn btn-ghost" href="#projects" data-lang="en">View Projects</a>
+          </div>
+        </div>
+
+        <aside>
+          <div class="card reveal">
+            <div class="h-title" data-lang="tr">Bilgi</div>
+            <div class="h-title" data-lang="en">Info</div>
+
+            <div class="contact-list">
+              <div class="contact-item">
+                <div class="contact-label" data-lang="tr">Lokasyon</div>
+                <div class="contact-label" data-lang="en">Location</div>
+                <div class="contact-value">İstanbul</div>
+              </div>
+              <div class="contact-item">
+                <div class="contact-label" data-lang="tr">Askerlik</div>
+                <div class="contact-label" data-lang="en">Military</div>
+                <div class="contact-value" data-lang="tr">Muaf</div>
+                <div class="contact-value" data-lang="en">Exempt</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="card skills reveal">
+            <div class="h-title" data-lang="tr">Yetenekler</div>
+            <div class="h-title" data-lang="en">Skills</div>
+
+            <div class="badges">
+              <span class="badge">EPLAN Electric P8</span>
+              <span class="badge" data-lang="tr">Pano Montaj & Kablaj</span>
+              <span class="badge" data-lang="en">Panel Assembly & Wiring</span>
+              <span class="badge" data-lang="tr">Saha Kurulumları</span>
+              <span class="badge" data-lang="en">Field Installation</span>
+              <span class="badge" data-lang="tr">Robotik Otomasyon</span>
+              <span class="badge" data-lang="en">Robotic Automation</span>
+              <span class="badge" data-lang="tr">Elektrik Proje Çizimi</span>
+              <span class="badge" data-lang="en">Electrical Project Design</span>
+              <span class="badge" data-lang="tr">Teknik Satın Alma</span>
+              <span class="badge" data-lang="en">Technical Procurement</span>
+              <span class="badge">MS Office</span>
+            </div>
+          </div>
+        </aside>
+
+      </div>
+    </section>
+
+    <!-- PROJECTS -->
+    <section id="projects" class="section">
+      <div class="container">
+        <div class="card reveal">
+          <div class="h-title" data-lang="tr">Çalıştığım Projeler</div>
+          <div class="h-title" data-lang="en">Projects</div>
+
+          <p class="p" style="margin-bottom:14px" data-lang="tr">
+            Timeline’daki bir projeye tıklayıp ilgili video kaydını izleyebilirsin.
+          </p>
+          <p class="p" style="margin-bottom:14px" data-lang="en">
+            Click a project in the timeline to watch the related video.
+          </p>
+
+          <div class="timeline" id="projectsTimeline"></div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Video Modal -->
+  <div class="modal" id="videoModal" aria-hidden="true">
+    <div class="modal-box" role="dialog" aria-modal="true" aria-labelledby="videoModalTitle">
+      <div class="modal-head">
+        <div class="modal-title" id="videoModalTitle">Project Video</div>
+        <button class="modal-close" id="closeVideoModal" type="button">Close ✕</button>
+      </div>
+      <div class="modal-video">
+        <iframe id="videoFrame" src=""
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          allowfullscreen></iframe>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast -->
+  <div class="toast" id="toast">
+    <div id="toastTitle">Bilgi</div>
+    <small id="toastDesc">Bu proje için video kaydı bulunmuyor.</small>
+  </div>
+
+  <footer>
+    <div class="container">
+      <span data-lang="tr">© Serkan Kılıç • Tüm Hakları Saklıdır</span>
+      <span data-lang="en">© Serkan Kılıç • All Rights Reserved</span>
+    </div>
+  </footer>
+
+  <script>
+    /* ===== Reveal ===== */
+    (function () {
+      const els = document.querySelectorAll('.reveal');
+      const io = new IntersectionObserver((entries) => {
+        entries.forEach(e => {
+          if (e.isIntersecting) e.target.classList.add('is-visible');
+        });
+      }, { threshold: 0.12 });
+      els.forEach(el => io.observe(el));
+    })();
+
+    /* ===== Toast ===== */
+    const toast = document.getElementById("toast");
+    const toastTitle = document.getElementById("toastTitle");
+    const toastDesc = document.getElementById("toastDesc");
+    let toastTimer = null;
+
+    function showToast(title, desc) {
+      toastTitle.textContent = title || "";
+      toastDesc.textContent = desc || "";
+      toast.classList.add("show");
+      clearTimeout(toastTimer);
+      toastTimer = setTimeout(() => toast.classList.remove("show"), 2200);
+    }
+
+    /* ===== Projects ===== */
+    const projects = [
+      {
+        name: "FORD OTOSAN",
+        logo: "https://upload.wikimedia.org/wikipedia/commons/5/56/Ford_Otosan_logo.svg",
+        metaTR: "Kocaeli • Framing & EMS Hattı",
+        metaEN: "Kocaeli • Framing & EMS Line",
+        video: "https://www.youtube.com/embed/BHbhfpXVAMM"
+      },
+      {
+        name: "TRT",
+        logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/6/6d/TRT_logo_%282018-%29.svg/960px-TRT_logo_%282018-%29.svg.png",
+        metaTR: "TRT Gemi Projesi",
+        metaEN: "TRT Ship Project",
+        video: "https://www.youtube.com/embed/NGOIs5zrhOc"
+      },
+      {
+        name: "TOGG",
+        logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5d/TOGG_logo.svg/3840px-TOGG_logo.svg.png",
+        metaTR: "Batarya Hattı",
+        metaEN: "Battery Line",
+        video: ""
+      },
+      {
+        name: "CASTROL",
+        logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/4/40/Castrol_logo_2023.svg/1280px-Castrol_logo_2023.svg.png",
+        metaTR: "Bursa • Shuttle Hattı",
+        metaEN: "Bursa • Shuttle Line",
+        video: "https://www.youtube.com/embed/OyU8rlQQEmE"
+      },
+      {
+        name: "MODERN KARTON",
+        logo: "https://midicompany.com.iq/file/2023/12/modernKarton-logo.png",
+        metaTR: "Tekirdağ • Nişasta Paletleme",
+        metaEN: "Tekirdağ • Starch Palletizing",
+        video: "https://www.youtube.com/embed/VW4J9h2fh5w"
+      },
+      {
+        name: "HACIAYVAZ",
+        logo: "https://www.ayvaz.com/wp-content/uploads/2023/07/logo@2x.png",
+        metaTR: "İstanbul • CNC Besleme Robotu",
+        metaEN: "Istanbul • CNC Feeding Robot",
+        video: "https://www.youtube.com/embed/rgJ_CU4QTYU"
+      },
+      {
+        name: "AGROBEST",
+        logo: "https://agrobestgrup.com/assets/image/agro.png",
+        metaTR: "Manisa • Paketleme Robotu",
+        metaEN: "Manisa • Packaging Robot",
+        video: "https://www.youtube.com/embed/1kQGBN6K53o"
+      },
+      {
+        name: "ARAGONİT",
+        logo: "https://imsad.org/files/fileman/Uploads/1%20Aragonit-2%20-%20Copy%201.png",
+        metaTR: "Antalya • Paletleme Robotu",
+        metaEN: "Antalya • Palletizing Robot",
+        video: "https://www.youtube.com/embed/ZR7jQ2O5hHs"
+      },
+      {
+        name: "KİPAŞ NİŞASTA",
+        logo: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQv5sH9dd69sPMO6e1u1JQ9mpWqJtd4Cxg7ug&s",
+        metaTR: "Kahramanmaraş • Paletleme & Strechood",
+        metaEN: "Kahramanmaraş • Palletizing & Stretch Hood",
+        video: "https://www.youtube.com/embed/863bzrxLgWo"
+      },
+      {
+        name: "NISSHIN SEIFUN MAKARNA",
+        logo: "https://nisshin-vietnam.com.vn/wp-content/themes/base/assets/img/logo-big.svg",
+        metaTR: "Ankara • Co-Bot Paletleme",
+        metaEN: "Ankara • Co-bot Palletizing",
+        video: "https://www.youtube.com/embed/CLXpPcbDR3U"
+      },
+      {
+        name: "NETAŞ MADENCİLİK",
+        logo: "https://netasmadencilik.com/wp-content/uploads/2024/05/Netas-Madencilik-Logo-Final-1400x459.png",
+        metaTR: "Ordu • Kedi Kumu Paletleme & Strechood",
+        metaEN: "Ordu • Cat Litter Palletizing & Stretch Hood",
+        video: "https://www.youtube.com/embed/LX7xg4MmFas"
+      },
+      {
+        name: "ARKOZ SEMENT",
+        logo: "https://www.arkozsement.com/assets/logo/logo-horizontal-1-rgb.jpg",
+        metaTR: "Gürcistan • Paletleme Robotu & Strechood",
+        metaEN: "Georgia • Palletizing Robot & Stretch Hood",
+        video: "https://www.youtube.com/embed/W-QZ1S-4ttM"
+      },
+      {
+        name: "GÜNEY SÜT",
+        logo: "https://seeklogo.com/images/G/guneysut-logo-4A73A69086-seeklogo.com.png",
+        metaTR: "Tetra Pack • Koli Paletleme & Streç Sarma",
+        metaEN: "Tetra Pak • Case Palletizing & Stretch Wrapping",
+        video: "https://www.youtube.com/embed/bntnto01E4Q"
+      },
+      {
+        name: "LESAFFRE",
+        logo: "https://labstil.com.tr/wp-content/uploads/2023/05/lesaffre-logo.png",
+        metaTR: "Amasya • Kuru maya paketleme & paletleme robotu",
+        metaEN: "Amasya • Dry yeast packaging & palletizing robot",
+        video: "https://www.youtube.com/embed/Toc5U6Kc4_Q"
+      },
+      {
+        name: "LESAFFRE",
+        logo: "https://labstil.com.tr/wp-content/uploads/2023/05/lesaffre-logo.png",
+        metaTR: "Lüleburgaz • Maya koli paletleme",
+        metaEN: "Lüleburgaz • Yeast case palletizing",
+        video: ""
+      }
+    ];
+
+    /* ===== Modal helpers ===== */
+    const videoModal = document.getElementById("videoModal");
+    const closeVideoModalBtn = document.getElementById("closeVideoModal");
+    const videoFrame = document.getElementById("videoFrame");
+    const videoModalTitle = document.getElementById("videoModalTitle");
+
+    function toYouTubeEmbed(url) {
+      if (!url) return "";
+      let m = url.match(/youtu\.be\/([a-zA-Z0-9_-]{6,})/);
+      if (m) return `https://www.youtube.com/embed/${m[1]}?autoplay=1&rel=0`;
+      m = url.match(/[?&]v=([a-zA-Z0-9_-]{6,})/);
+      if (m) return `https://www.youtube.com/embed/${m[1]}?autoplay=1&rel=0`;
+      m = url.match(/youtube\.com\/shorts\/([a-zA-Z0-9_-]{6,})/);
+      if (m) return `https://www.youtube.com/embed/${m[1]}?autoplay=1&rel=0`;
+      m = url.match(/youtube\.com\/embed\/([a-zA-Z0-9_-]{6,})/);
+      if (m) return `https://www.youtube.com/embed/${m[1]}?autoplay=1&rel=0`;
+      return url;
+    }
+
+    function openVideoModal(videoUrl, title) {
+      if (!videoUrl) return;
+      videoModalTitle.textContent = title || "Project Video";
+      videoFrame.src = toYouTubeEmbed(videoUrl);
+      videoModal.classList.add("open");
+      videoModal.setAttribute("aria-hidden", "false");
+    }
+
+    function closeVideoModal() {
+      videoModal.classList.remove("open");
+      videoModal.setAttribute("aria-hidden", "true");
+      videoFrame.src = "";
+    }
+
+    closeVideoModalBtn.addEventListener("click", closeVideoModal);
+    videoModal.addEventListener("click", (e) => {
+      if (e.target === videoModal) closeVideoModal();
+    });
+    window.addEventListener("keydown", (e) => {
+      if (e.key === "Escape" && videoModal.classList.contains("open")) closeVideoModal();
+    });
+
+    function renderProjectsTimeline(lang) {
+      const root = document.getElementById("projectsTimeline");
+      if (!root) return;
+
+      root.innerHTML = projects.map(p => {
+        const hasVideo = !!p.video;
+        const title = (p.name + " • " + (lang === 'en' ? (p.metaEN || '') : (p.metaTR || ''))).replaceAll('"', '&quot;');
+
+        const chip = hasVideo
+          ? `<span class="tl-chip play">${lang === 'en' ? 'Play' : 'İzle'}</span>`
+          : `<span class="tl-chip">${lang === 'en' ? 'No video' : 'Video yok'}</span>`;
+
+        return `
+        <div class="tl-item">
+          <div class="tl-dot"></div>
+          <div class="tl-card ${hasVideo ? '' : 'disabled'}" tabindex="0" role="button"
+               data-video="${hasVideo ? p.video : ''}"
+               data-title="${title}">
+            <img class="tl-logo"
+                 src="${p.logo || ''}"
+                 alt="${p.name} logo"
+                 loading="lazy"
+                 onerror="this.style.display='none';" />
+            <div class="tl-content">
+              <div class="tl-title">${p.name}</div>
+              <p class="tl-meta">${lang === 'en' ? (p.metaEN || '') : (p.metaTR || '')}</p>
+            </div>
+            ${chip}
+          </div>
+        </div>
+      `;
+      }).join("");
+
+      root.querySelectorAll(".tl-card").forEach(card => {
+        const video = card.dataset.video;
+        const open = () => openVideoModal(video, card.dataset.title);
+
+        card.addEventListener("click", () => {
+          if (video) return open();
+          showToast(
+            (lang === 'en') ? "No video" : "Video yok",
+            (lang === 'en')
+              ? "There is no video available for this project."
+              : "Bu proje için video kaydı bulunmuyor."
+          );
+        });
+
+        card.addEventListener("keydown", (e) => {
+          if (e.key === "Enter" || e.key === " ") {
+            e.preventDefault();
+            if (video) return open();
+            showToast(
+              (lang === 'en') ? "No video" : "Video yok",
+              (lang === 'en')
+                ? "There is no video available for this project."
+                : "Bu proje için video kaydı bulunmuyor."
+            );
+          }
+        });
+      });
+    }
+
+    /* ===== Language Switch ===== */
+    const allLangNodes = document.querySelectorAll('[data-lang]');
+    const btnTR = document.getElementById('btnTR');
+    const btnEN = document.getElementById('btnEN');
+
+    function setLanguage(lang) {
+      allLangNodes.forEach(node => {
+        node.style.display = (node.getAttribute('data-lang') === lang) ? '' : 'none';
+      });
+      btnTR.classList.toggle('active', lang === 'tr');
+      btnEN.classList.toggle('active', lang === 'en');
+
+      localStorage.setItem('siteLang', lang);
+      document.documentElement.lang = lang;
+
+      closeVideoModalBtn.textContent = (lang === 'en') ? 'Close ✕' : 'Kapat ✕';
+      videoModalTitle.textContent = (lang === 'en') ? 'Project Video' : 'Proje Videosu';
+
+      toastTitle.textContent = (lang === 'en') ? "Info" : "Bilgi";
+      toastDesc.textContent = (lang === 'en')
+        ? "There is no video available for this project."
+        : "Bu proje için video kaydı bulunmuyor.";
+
+      renderProjectsTimeline(lang);
+    }
+
+    btnTR.addEventListener('click', () => setLanguage('tr'));
+    btnEN.addEventListener('click', () => setLanguage('en'));
+
+    const initialLang = localStorage.getItem('siteLang') || 'tr';
+    setLanguage(initialLang);
+  </script>
+
+</body>
+
+</html>
